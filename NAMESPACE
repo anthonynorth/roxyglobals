@@ -3,6 +3,7 @@
 S3method(roclet_clean,roclet_global)
 S3method(roclet_output,roclet_global)
 S3method(roclet_process,roclet_global)
+S3method(roxy_tag_parse,roxy_tag_autoglobal)
 S3method(roxy_tag_parse,roxy_tag_global)
 export(global_roclet)
 export(use_roxyglobals)

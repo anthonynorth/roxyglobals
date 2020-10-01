@@ -9,8 +9,7 @@ extract_globals <- function(func) {
 
   enter <- function(type, name, expr, walker) {
     undefined <- !exists(
-      name,
-      envir = walker$globalenv, mode = ifelse(type == "function", type, "any")
+      name, envir = walker$globalenv, mode = ifelse(type == "function", type, "any")
     )
 
     if (undefined && (type == "variable" || type == "function" && name == c(":="))) {
