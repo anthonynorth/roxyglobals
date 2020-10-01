@@ -9,6 +9,7 @@ License: MIT + file LICENSE
 URL: https://github.com/anthonynorth/roxyglobals
 BugReports: https://github.com/anthonynorth/roxyglobals/issues
 Imports:
+    codetools,
     desc,
     magrittr,
     roxygen2,
