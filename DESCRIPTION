@@ -1,6 +1,6 @@
 Package: roxyglobals
 Title: Roxgen2 Global Variable Declarations
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person(given = "Anthony", family = "North", role = c("aut", "cre"), email = "anthony.jl.north@gmail.com"),
     person(given = "Miles", family = "McBain", role = "ctb", email = "miles.mcbain@gmail.com", comment = c(ORCID = "0000-0003-2865-2548")))
