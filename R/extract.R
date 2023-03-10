@@ -1,32 +1,33 @@
-#' Extract globals
-#'
-#' @param func a function to extract from
-#' @keywords internal
-#' @noRd
-extract_globals <- function(func) {
+# extract globals
+extract_globals <- function(fn) {
   env <- environment()
-  globals <- c()
 
-  enter <- function(type, name, expr, walker) {
-    undefined <- !is_defined(name, walker$globalenv)
-    if (undefined && (type == "variable" || type == "function" && name == ":=")) {
-      env$globals <- c(globals, name)
+  codetools::collectUsage(
+    fn,
+    enterGlobal = function(type, name, expr, walker) {
+      if (type == "function") env$last_call <- expr
+
+      if (!is_defined(name, walker$globalenv) && !is_assign(env$last_call) &&
+        (type == "variable" || type == "function" && name == ":=")) {
+        env$globals <- c(env$globals, name)
+      }
+    },
+    enterLocal = function(type, name, expr, walker) {
+      if (type == "function") env$last_call <- expr
     }
-  }
+  )
 
-  codetools::collectUsage(func, enterGlobal = enter)
-  unique(globals)
+  unique(env$globals)
 }
 
-#' Is defined
-#'
-#' @param name a binding name
-#' @param env an environment
-#' @param inherit look for names in parent environments
-#'
-#' @keywords internal
-#' @noRd
+# is expr an assignment call?
+is_assign <- function(expr) {
+  is.call(expr) && as.character(expr[[1]]) %in% c("<-", "<<-", "=", "assign")
+}
+
+# is name defined in package env?
 is_defined <- function(name, env, inherit = FALSE) {
   exists(name, envir = env, inherits = inherit) ||
+    exists(name, envir = parent.env(env), inherits = inherit) ||
     exists(name, envir = baseenv(), inherits = inherit)
 }
