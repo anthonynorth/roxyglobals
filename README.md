@@ -3,7 +3,7 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/anthonynorth/roxyglobals/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anthonynorth/roxyglobals/actions/workflows/R-CMD-check.yaml)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![release](https://img.shields.io/github/v/release/anthonynorth/roxyglobals&logo=github&sort=semver)](https://github.com/anthonynorth/roxyglobals/releases/latest)
+[![release](https://img.shields.io/github/v/release/anthonynorth/roxyglobals?logo=github&sort=semver)](https://github.com/anthonynorth/roxyglobals/releases/latest)
 [![latest](https://img.shields.io/github/r-package/v/anthonynorth/roxyglobals?label=latest&logo=r)](https://github.com/anthonynorth/roxyglobals/latest)
 <!-- badges: end -->
 
