@@ -1,3 +1,7 @@
+# roxyglobals (development version)
+
+- (optionally) write unique globals (#6)
+
 # roxyglobals 0.2.2
 
 - @autoglobal ignore assignment expressions (#7)

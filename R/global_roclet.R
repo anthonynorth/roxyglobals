@@ -7,7 +7,15 @@ global_roclet <- function() roxygen2::roclet("global")
 #' @importFrom roxygen2 roclet_process
 #' @export
 roclet_process.roclet_global <- function(x, blocks, env, base_path) {
-  blocks_to_globals(blocks)
+  lines <- blocks_to_globals(blocks)
+
+  paste_line(
+    generated_by(),
+    "utils::globalVariables(c(",
+    indent(lines),
+    indent("NULL"),
+    "))"
+  )
 }
 
 #' @importFrom roxygen2 roclet_output
@@ -37,34 +45,41 @@ roxy_tag_parse.roxy_tag_autoglobal <- function(x) roxygen2::tag_toggle(x)
 
 
 blocks_to_globals <- function(blocks) {
-  globals <- lapply(blocks, block_to_globals) %>%
-    unlist() %>%
-    c("  NULL") %>%
-    paste0(collapse = "\n")
+  globals <- do.call(rbind, lapply(blocks, block_to_globals))
+  fmt_fn <- function(x) paste0("# <", x, ">")
 
-  paste(
-    sep = "\n",
-    generated_by(),
-    "utils::globalVariables(c(",
-      globals,
-    "))"
-  )
+  if (!unique_globals()) {
+    return(
+      paste0(quote_str(globals$global_name), ", ", fmt_fn(globals$fn_name))
+    )
+  }
+
+  group_fmt <- function(x) {
+    paste0(c(
+      fmt_fn(x$fn_name),
+      paste0(quote_str(x$global_name[1]), ",")
+    ))
+  }
+
+  groups <- split(globals, globals$global_name)
+  unlist(lapply(groups, group_fmt))
 }
 
 block_to_globals <- function(block) {
-  explicit_globals <- roxygen2::block_get_tags(block, "global") %>%
-    lapply(function(tag) tag$val) %>%
-    unlist()
+  object <- block$object$value
+  name <- block$object$alias
 
-  fn <- block$object$value
-  auto_globals <- if (roxygen2::block_has_tags(block, "autoglobal") && is.function(fn))
-    extract_globals(fn)
+  # @global
+  global_tags <- roxygen2::block_get_tags(block, "global")
+  explicit_globals <- unlist(lapply(global_tags, function(tag) tag$val))
+
+  # @autoglobal
+  auto_globals <- if (roxygen2::block_has_tags(block, "autoglobal") && is.function(object)) {
+    extract_globals(object)
+  }
 
   globals <- unique(c(explicit_globals, auto_globals))
-  if (length(globals)) {
-    fn_name <- block$object$alias
-    paste0("  ", lapply(globals, dQuote, FALSE), ", # <", fn_name, ">")
-  }
+  data.frame(fn_name = rep_len(name, length(globals)), global_name = globals)
 }
 
 generated_by <- function() {
