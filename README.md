@@ -1,17 +1,12 @@
-<p align="right">
-  <a href="https://github.com/anthonynorth/roxyglobals/releases/latest">
-    <img src="https://img.shields.io/github/v/release/anthonynorth/roxyglobals?sort=semver&style=flat-square" alt="release">
-  </a>
-  <a href="https://www.tidyverse.org/lifecycle/#experimental">
-    <img src="https://img.shields.io/badge/lifecycle-experimental-orange?style=flat-square" alt="lifecycle" />
-  </a>
-</p>
+# roxyglobals
 
-<h1 align="center">roxyglobals</h1>
+<!-- badges: start -->
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![release](https://img.shields.io/github/v/release/anthonynorth/roxyglobals&logo=github&sort=semver)](https://github.com/anthonynorth/roxyglobals/releases/latest)
+[![latest](https://img.shields.io/github/r-package/v/anthonynorth/roxyglobals?label=latest&logo=r)](https://github.com/anthonynorth/roxyglobals/latest)
+<!-- badges: end -->
 
-<p align="center">
-  Generate `utils::globalVariables()` from roxygen @global tags.
-</p>
+Generate `utils::globalVariables()` from roxygen @autoglobal & @global tags.
 
 ## Installation
 
