@@ -7,31 +7,35 @@ use_roxyglobals <- function() {
   usethis::use_dev_package(utils::packageName(), type = "Suggests")
 
   # current roxygen options
-  options <- get_options()
+  options <- roxy_options_get()
 
   # add roclet
   options$roclets <- unique(c(
-    # defaults
-    "collate", "namespace", "rd",
-    roxygen2::roxy_meta_get("roclets"),
+    options$roclets,
     # could use a string, but this should be refactor proof
     paste0(utils::packageName(), "::", substitute(global_roclet))
   ))
 
-  set_options(options)
+  roxy_options_set(options)
 }
 
-get_options <- function() {
-  text <- desc::desc_get_field("Roxygen", default = "list(markdown = TRUE)")
-  eval(parse(text = text))
+roxy_options_get <- function() {
+  desc_text <- desc::desc_get_field("Roxygen", default = "list()")
+  desc_opts <- eval(parse(text = desc_text))
+  all_opts <- roxygen2::load_options()
+
+  # any options present in description + roclets
+  keys <- unique(c(names(desc_opts), "roclets"))
+  all_opts[keys]
 }
 
-set_options <- function(options) {
-  text <- paste0(
-    "list(\n",
-      paste0("    ", names(options), " = ", options, collapse = ",\n"),
-    ")"
+roxy_options_set <- function(options) {
+  text <- paste_line(
+    strwrap(
+      deparse(options, 500L),
+      width = 70L,
+      exdent = 4L
+    )
   )
-
   desc::desc_set("Roxygen", text)
 }

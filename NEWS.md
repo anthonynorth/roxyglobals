@@ -1,6 +1,7 @@
 # roxyglobals (development version)
 
 - (optionally) write unique globals (#6)
+- preserve existing roclets (#9)
 
 # roxyglobals 0.2.2
 
