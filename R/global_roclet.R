@@ -48,7 +48,7 @@ blocks_to_globals <- function(blocks) {
   globals <- do.call(rbind, lapply(blocks, block_to_globals))
   fmt_fn <- function(x) paste0("# <", x, ">")
 
-  if (!unique_globals()) {
+  if (!options_get_unique()) {
     return(
       paste0(quote_str(globals$global_name), ", ", fmt_fn(globals$fn_name))
     )
