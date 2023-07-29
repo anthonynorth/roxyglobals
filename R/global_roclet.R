@@ -67,11 +67,11 @@ blocks_to_globals <- function(blocks) {
 
 block_to_globals <- function(block) {
   object <- block$object$value
-  name <- block$object$alias
+  name <- block$object$alias %??%
+    first(block_get_tag_values(block, c("name", "rdname")))
 
   # @global
-  global_tags <- roxygen2::block_get_tags(block, "global")
-  explicit_globals <- unlist(lapply(global_tags, function(tag) tag$val))
+  explicit_globals <- block_get_tag_values(block, "global")
 
   # @autoglobal
   auto_globals <- if (roxygen2::block_has_tags(block, "autoglobal") && is.function(object)) {
@@ -79,7 +79,13 @@ block_to_globals <- function(block) {
   }
 
   globals <- unique(c(explicit_globals, auto_globals))
-  data.frame(fn_name = rep_len(name, length(globals)), global_name = globals)
+  if (!is.null(name) && length(globals) != 0)
+    data.frame(fn_name = rep_len(name, length(globals)), global_name = globals)
+}
+
+block_get_tag_values <- function(block, tags) {
+  block_tags <- roxygen2::block_get_tags(block, tags)
+  unlist(lapply(block_tags, function(tag) tag$val))
 }
 
 generated_by <- function() {
