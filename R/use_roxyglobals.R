@@ -7,7 +7,7 @@ use_roxyglobals <- function() {
   desc::desc_set_dep(utils::packageName(), type = "Suggests")
 
   # current roxygen options
-  options <- options_get_roxgen()
+  options <- options_get_roxygen()
 
   # add roclet
   options$roclets <- unique(c(

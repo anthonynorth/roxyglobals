@@ -54,7 +54,7 @@ options_set_filename <- function(value, file = ".") {
   )
 }
 
-options_get_roxgen <- function(file = ".") {
+options_get_roxygen <- function(file = ".") {
   desc_text <- desc::desc_get_field(
     "Roxygen",
     default = list(),
