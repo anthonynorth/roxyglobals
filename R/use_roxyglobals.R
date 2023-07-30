@@ -4,7 +4,7 @@
 #' @export
 use_roxyglobals <- function() {
   # add dependency
-  usethis::use_dev_package(utils::packageName(), type = "Suggests")
+  desc::desc_set_dep(utils::packageName(), type = "Suggests")
 
   # current roxygen options
   options <- options_get_roxgen()
@@ -22,4 +22,5 @@ use_roxyglobals <- function() {
   # ensure roxyglobals options
   options_set_filename(options_get_filename())
   options_set_unique(options_get_unique())
+  invisible(NULL)
 }

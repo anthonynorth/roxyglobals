@@ -14,8 +14,7 @@ Imports:
     codetools,
     desc,
     roxygen2,
-    stringi,
-    usethis
+    stringi
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
