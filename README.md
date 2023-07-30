@@ -5,6 +5,7 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![release](https://img.shields.io/github/v/release/anthonynorth/roxyglobals?logo=github&sort=semver)](https://github.com/anthonynorth/roxyglobals/releases/latest)
 [![latest](https://img.shields.io/github/r-package/v/anthonynorth/roxyglobals?label=latest&logo=r)](https://github.com/anthonynorth/roxyglobals/latest)
+[![Codecov test coverage](https://codecov.io/gh/anthonynorth/roxyglobals/branch/master/graph/badge.svg)](https://app.codecov.io/gh/anthonynorth/roxyglobals?branch=master)
 <!-- badges: end -->
 
 Generate `utils::globalVariables()` from roxygen @autoglobal & @global tags.

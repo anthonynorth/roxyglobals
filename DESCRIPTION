@@ -16,6 +16,7 @@ Imports:
     desc,
     roxygen2
 Suggests:
+    covr,
     testthat (>= 3.0.0),
     withr
 Config/testthat/edition: 3

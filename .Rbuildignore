@@ -1,2 +1,3 @@
 # dot-files
 ^\..*$
+^codecov\.yml$
