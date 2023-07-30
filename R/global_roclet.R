@@ -7,7 +7,7 @@ global_roclet <- function() roxygen2::roclet("global")
 #' @importFrom roxygen2 roclet_process
 #' @export
 roclet_process.roclet_global <- function(x, blocks, env, base_path) {
-  lines <- blocks_to_globals(blocks)
+  lines <- blocks_to_globals(blocks, options_get_unique(base_path))
 
   paste_line(
     generated_by(),
@@ -44,11 +44,11 @@ roxy_tag_parse.roxy_tag_global <- function(x) {
 roxy_tag_parse.roxy_tag_autoglobal <- function(x) roxygen2::tag_toggle(x)
 
 
-blocks_to_globals <- function(blocks) {
+blocks_to_globals <- function(blocks, unique) {
   globals <- do.call(rbind, lapply(blocks, block_to_globals))
   fmt_fn <- function(x) paste0("# <", x, ">")
 
-  if (!options_get_unique()) {
+  if (!unique) {
     return(
       paste0(quote_str(globals$global_name), ", ", fmt_fn(globals$fn_name))
     )
