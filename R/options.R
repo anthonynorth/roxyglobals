@@ -10,6 +10,7 @@ NULL
 
 
 #' @export
+#' @return The option value
 #' @describeIn options get unique
 options_get_unique <- function(file = ".") {
   text <- desc::desc_get_field(
@@ -21,12 +22,34 @@ options_get_unique <- function(file = ".") {
 }
 
 #' @export
-#' @param unique Whether to emit unique globals
+#' @param value The new option value
 #' @describeIn options set unique
-options_set_unique <- function(unique, file = ".") {
+options_set_unique <- function(value, file = ".") {
   desc::desc_set(
     options_key("unique"),
-    isTRUE(unique),
+    isTRUE(value),
+    file = file
+  )
+}
+
+#' @export
+#' @describeIn options get filename
+options_get_filename <- function(file = ".") {
+  desc::desc_get_field(
+    options_key("filename"),
+    "globals.R",
+    file = file
+  )
+}
+
+#' @export
+#' @describeIn options set filename
+options_set_filename <- function(value, file = ".") {
+  stopifnot(is_r_file(value))
+
+  desc::desc_set(
+    options_key("filename"),
+    basename(value[1]),
     file = file
   )
 }

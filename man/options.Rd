@@ -4,11 +4,27 @@
 \alias{options}
 \alias{options_get_unique}
 \alias{options_set_unique}
+\alias{options_get_filename}
+\alias{options_set_filename}
 \title{Roxyglobals options}
 \usage{
-options_get_unique()
+options_get_unique(file = ".")
 
-options_set_unique(unique)
+options_set_unique(value, file = ".")
+
+options_get_filename(file = ".")
+
+options_set_filename(value, file = ".")
+}
+\arguments{
+\item{file}{DESCRIPTION file to use. By default the DESCRIPTION
+file of the current package (i.e. the package the working directory
+is part of) is used.}
+
+\item{value}{The new option value}
+}
+\value{
+The option value
 }
 \description{
 Get & set roxyglobals options in DESCRIPTION file.
@@ -18,6 +34,10 @@ Get & set roxyglobals options in DESCRIPTION file.
 \item \code{options_get_unique()}: get unique
 
 \item \code{options_set_unique()}: set unique
+
+\item \code{options_get_filename()}: get filename
+
+\item \code{options_set_filename()}: set filename
 
 }}
 \keyword{internal}
