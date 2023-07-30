@@ -11,10 +11,10 @@ License: MIT + file LICENSE
 URL: https://github.com/anthonynorth/roxyglobals
 BugReports: https://github.com/anthonynorth/roxyglobals/issues
 Imports:
+    brio,
     codetools,
     desc,
-    roxygen2,
-    stringi
+    roxygen2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

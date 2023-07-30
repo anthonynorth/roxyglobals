@@ -21,7 +21,7 @@ roclet_process.roclet_global <- function(x, blocks, env, base_path) {
 #' @importFrom roxygen2 roclet_output
 #' @export
 roclet_output.roclet_global <- function(x, results, base_path, ...) {
-  stringi::stri_write_lines(results, globals_filename(base_path))
+  brio::write_lines(results, globals_filename(base_path))
   invisible(NULL)
 }
 
