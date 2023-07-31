@@ -17,7 +17,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Anthony North \email{anthony.jl.north@gmail.com}
+\strong{Maintainer}: Anthony North \email{anthony.jl.north@gmail.com} [copyright holder]
 
 Other contributors:
 \itemize{
