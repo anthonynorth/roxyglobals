@@ -4,9 +4,9 @@
 \name{roxyglobals-package}
 \alias{roxyglobals}
 \alias{roxyglobals-package}
-\title{roxyglobals: Roxygen2 Global Variable Declarations}
+\title{roxyglobals: 'Roxygen2' Global Variable Declarations}
 \description{
-Generate utils::globalVariables() from roxygen2 @global and @autoglobal tags.
+Generate utils::globalVariables() from 'roxygen2' @global and @autoglobal tags.
 }
 \seealso{
 Useful links:
