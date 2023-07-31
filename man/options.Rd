@@ -40,4 +40,14 @@ Get & set roxyglobals options in DESCRIPTION file.
 \item \code{options_set_filename()}: set filename
 
 }}
+\examples{
+options_get_unique()
+\dontrun{
+options_set_unique(TRUE)
+}
+options_get_filename()
+\dontrun{
+options_set_filename("roxyglobals-generated.R")
+}
+}
 \keyword{internal}

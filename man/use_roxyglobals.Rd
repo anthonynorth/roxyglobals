@@ -6,6 +6,14 @@
 \usage{
 use_roxyglobals()
 }
+\value{
+nothing
+}
 \description{
 Configures roxygen to use \code{\link[=global_roclet]{global_roclet()}}, adds roxyglobals to Suggests
+}
+\examples{
+\dontrun{
+use_roxyglobals()
+}
 }

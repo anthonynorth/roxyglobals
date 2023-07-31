@@ -5,12 +5,15 @@
 #'
 #' @name options
 #' @inheritParams desc::desc_get_field
+#' @param value The new option value
+#' @return The option value
 #' @keywords internal
 NULL
 
 
 #' @export
-#' @return The option value
+#' @examples
+#' options_get_unique()
 #' @describeIn options get unique
 options_get_unique <- function(file = ".") {
   default <- FALSE
@@ -28,20 +31,28 @@ options_get_unique <- function(file = ".") {
 }
 
 #' @export
-#' @param value The new option value
 #' @describeIn options set unique
+#' @examples
+#' \dontrun{
+#' options_set_unique(TRUE)
+#' }
 options_set_unique <- function(value, file = ".") {
   assert_in_pkg(file)
 
+  unique_value <- isTRUE(value)
   desc::desc_set(
     options_key("unique"),
-    isTRUE(value),
+    unique_value,
     file = file
   )
+
+  unique_value
 }
 
 #' @export
 #' @describeIn options get filename
+#' @examples
+#' options_get_filename()
 options_get_filename <- function(file = ".") {
   default <- "globals.R"
   if (!in_pkg(file)) {
@@ -57,15 +68,22 @@ options_get_filename <- function(file = ".") {
 
 #' @export
 #' @describeIn options set filename
+#' @examples
+#' \dontrun{
+#' options_set_filename("roxyglobals-generated.R")
+#' }
 options_set_filename <- function(value, file = ".") {
   stopifnot(is_r_file(value))
   assert_in_pkg(file)
 
+  filename_value <- basename(value[1])
   desc::desc_set(
     options_key("filename"),
-    basename(value[1]),
+    filename_value,
     file = file
   )
+
+  filename_value
 }
 
 options_get_roxygen <- function(file = ".") {

@@ -1,7 +1,13 @@
 #' Use roxyglobals
 #'
 #' Configures roxygen to use [global_roclet()], adds roxyglobals to Suggests
+#' @return nothing
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' use_roxyglobals()
+#' }
 use_roxyglobals <- function() {
   assert_in_pkg(".")
 
