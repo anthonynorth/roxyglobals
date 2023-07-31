@@ -14,7 +14,7 @@ Generate `utils::globalVariables()` from roxygen @autoglobal and @global tags.
 
 ```r
 # Install the released version from CRAN
-install.packages("testthat")
+install.packages("roxyglobals")
 
 # Install the released version from r-universe
 install.packages("roxyglobals", repos = "https://anthonynorth.r-universe.dev")
