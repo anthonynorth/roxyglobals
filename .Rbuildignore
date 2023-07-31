@@ -1,3 +1,4 @@
 # dot-files
 ^\..*$
 ^codecov\.yml$
+^LICENSE\.md$
