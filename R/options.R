@@ -1,12 +1,12 @@
 #' Roxyglobals options
 #'
 #' @description
-#' Get & set roxyglobals options in DESCRIPTION file.
+#' Get and set roxyglobals options in DESCRIPTION file.
 #'
 #' @name options
 #' @inheritParams desc::desc_get_field
 #' @param value The new option value
-#' @return The option value
+#' @return The option value or nothing
 #' @keywords internal
 NULL
 
@@ -39,14 +39,13 @@ options_get_unique <- function(file = ".") {
 options_set_unique <- function(value, file = ".") {
   assert_in_pkg(file)
 
-  unique_value <- isTRUE(value)
   desc::desc_set(
     options_key("unique"),
-    unique_value,
+    isTRUE(value),
     file = file
   )
 
-  unique_value
+  invisible()
 }
 
 #' @export
@@ -76,14 +75,13 @@ options_set_filename <- function(value, file = ".") {
   stopifnot(is_r_file(value))
   assert_in_pkg(file)
 
-  filename_value <- basename(value[1])
   desc::desc_set(
     options_key("filename"),
-    filename_value,
+    basename(value[1]),
     file = file
   )
 
-  filename_value
+  invisible()
 }
 
 options_get_roxygen <- function(file = ".") {

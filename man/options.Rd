@@ -24,10 +24,10 @@ is part of) is used.}
 \item{value}{The new option value}
 }
 \value{
-The option value
+The option value or nothing
 }
 \description{
-Get & set roxyglobals options in DESCRIPTION file.
+Get and set roxyglobals options in DESCRIPTION file.
 }
 \section{Functions}{
 \itemize{
