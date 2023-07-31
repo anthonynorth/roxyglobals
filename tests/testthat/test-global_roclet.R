@@ -75,7 +75,6 @@ test_that("global_roclet() writes unique globals", {
 test_that("global_roclet() writes to custom filename", {
   pkg_path <- local_package_copy(test_path("./config-filename"))
   globals_file <- file.path(pkg_path, "R", "generated-globals.R")
-  on.exit(unlink(globals_file))
 
   suppressMessages(roxygen2::roxygenise(pkg_path))
 
@@ -92,5 +91,23 @@ test_that("global_roclet() writes to custom filename", {
       "  NULL",
       "))"
     )
+  )
+})
+
+test_that("global_roclet() cleans globals file", {
+  pkg_path <- local_package_copy(test_path("./empty"))
+  globals_file <- file.path(pkg_path, "R", "globals.R")
+
+  roxygen2::roclet_clean(global_roclet(), pkg_path)
+  expect_false(
+    file.exists(globals_file)
+  )
+
+  # ensure file exists
+  suppressMessages(roxygen2::roxygenise(pkg_path, clean = TRUE))
+
+  roxygen2::roclet_clean(global_roclet(), pkg_path)
+  expect_false(
+    file.exists(globals_file)
   )
 })
