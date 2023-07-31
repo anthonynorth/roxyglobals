@@ -1,5 +1,5 @@
 Package: roxyglobals
-Title: Roxgen2 Global Variable Declarations
+Title: Roxygen2 Global Variable Declarations
 Version: 0.2.2
 Authors@R: c(
     person("Anthony", "North", , "anthony.jl.north@gmail.com", role = c("aut", "cre")),
