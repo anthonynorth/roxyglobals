@@ -1,4 +1,4 @@
-# roxyglobals (development version)
+# roxyglobals 1.0.0
 
 - configurable globals filename (#10)
 - preserve existing roclets (#9)
