@@ -13,11 +13,17 @@ NULL
 #' @return The option value
 #' @describeIn options get unique
 options_get_unique <- function(file = ".") {
+  default <- FALSE
+  if (!in_pkg(file)) {
+    return(default)
+  }
+
   text <- desc::desc_get_field(
     options_key("unique"),
-    FALSE,
+    default,
     file = file
   )
+
   eval(parse(text = text))
 }
 
@@ -25,6 +31,8 @@ options_get_unique <- function(file = ".") {
 #' @param value The new option value
 #' @describeIn options set unique
 options_set_unique <- function(value, file = ".") {
+  assert_in_pkg(file)
+
   desc::desc_set(
     options_key("unique"),
     isTRUE(value),
@@ -35,9 +43,14 @@ options_set_unique <- function(value, file = ".") {
 #' @export
 #' @describeIn options get filename
 options_get_filename <- function(file = ".") {
+  default <- "globals.R"
+  if (!in_pkg(file)) {
+    return(default)
+  }
+
   desc::desc_get_field(
     options_key("filename"),
-    "globals.R",
+    default,
     file = file
   )
 }
@@ -46,6 +59,7 @@ options_get_filename <- function(file = ".") {
 #' @describeIn options set filename
 options_set_filename <- function(value, file = ".") {
   stopifnot(is_r_file(value))
+  assert_in_pkg(file)
 
   desc::desc_set(
     options_key("filename"),
@@ -55,6 +69,8 @@ options_set_filename <- function(value, file = ".") {
 }
 
 options_get_roxygen <- function(file = ".") {
+  assert_in_pkg(file)
+
   desc_text <- desc::desc_get_field(
     "Roxygen",
     default = list(),
@@ -69,6 +85,8 @@ options_get_roxygen <- function(file = ".") {
 }
 
 options_set_roxygen <- function(options, file = ".") {
+  assert_in_pkg(file)
+
   text <- paste_line(
     strwrap(
       deparse(options, 500L),
@@ -76,6 +94,7 @@ options_set_roxygen <- function(options, file = ".") {
       exdent = 4L
     )
   )
+
   desc::desc_set(
     "Roxygen",
     text,
@@ -89,4 +108,19 @@ options_key <- function(name) {
     c("Config", utils::packageName(), name),
     collapse = "/"
   )
+}
+
+in_pkg <- function(file = ".") {
+  tryCatch(
+    !is.null(desc::desc(file = file)),
+    error = function(e) FALSE
+  )
+}
+
+assert_in_pkg <- function(file) {
+  if (!in_pkg(file)) {
+    stop(paste0(tools::file_path_as_absolute("."), " is not inside a package."))
+  }
+
+  invisible()
 }

@@ -3,6 +3,8 @@
 #' Configures roxygen to use [global_roclet()], adds roxyglobals to Suggests
 #' @export
 use_roxyglobals <- function() {
+  assert_in_pkg(".")
+
   # add dependency
   desc::desc_set_dep(utils::packageName(), type = "Suggests")
 
@@ -22,5 +24,6 @@ use_roxyglobals <- function() {
   # ensure roxyglobals options
   options_set_filename(options_get_filename())
   options_set_unique(options_get_unique())
-  invisible(NULL)
+
+  invisible()
 }
