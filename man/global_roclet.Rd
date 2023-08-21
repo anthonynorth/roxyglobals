@@ -6,6 +6,28 @@
 \usage{
 global_roclet()
 }
+\value{
+A \code{\link[roxygen2:roclet]{roxygen2::roclet()}} instance for declaring \code{\link[utils:globalVariables]{utils::globalVariables()}}
+during \code{\link[roxygen2:roxygenize]{roxygen2::roxygenise()}}
+}
 \description{
-Roclet: global
+This roclet automates \code{\link[utils:globalVariables]{utils::globalVariables()}} declaration from @global
+and @autoglobal roxygen tags.
+
+Package authors will not typically need to invoke \code{\link[=global_roclet]{global_roclet()}} directly.
+Global roclet instances are created by \code{roxygen2} during \code{\link[roxygen2:roxygenize]{roxygen2::roxygenise()}}
+(or \code{\link[devtools:document]{devtools::document()}}).
+}
+\examples{
+#' @autoglobal
+foo <- function(x) {
+  # bar isn't declared -> add to utils::globalVariables()
+  subset(x, bar == 4)
+}
+
+#' @global bar
+foo <- function(x) {
+  # bar is explicitly defined as a global -> add to utils::globalVariables()
+  subset(x, bar == 4)
+}
 }

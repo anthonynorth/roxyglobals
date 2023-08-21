@@ -1,8 +1,33 @@
 #' Roclet: global
 #'
+#' @description
+#' This roclet automates [utils::globalVariables()] declaration from @global
+#' and @autoglobal roxygen tags.
+#'
+#' Package authors will not typically need to invoke [global_roclet()] directly.
+#' Global roclet instances are created by `roxygen2` during [roxygen2::roxygenise()]
+#' (or [devtools::document()]).
+#'
 #' @importFrom roxygen2 roclet
+#' @return A [roxygen2::roclet()] instance for declaring [utils::globalVariables()]
+#' during [roxygen2::roxygenise()]
 #' @export
-global_roclet <- function() roxygen2::roclet("global")
+#'
+#' @examples
+#' #' @autoglobal
+#' foo <- function(x) {
+#'   # bar isn't declared -> add to utils::globalVariables()
+#'   subset(x, bar == 4)
+#' }
+#'
+#' #' @global bar
+#' foo <- function(x) {
+#'   # bar is explicitly defined as a global -> add to utils::globalVariables()
+#'   subset(x, bar == 4)
+#' }
+global_roclet <- function() {
+  roxygen2::roclet("global")
+}
 
 #' @importFrom roxygen2 roclet_process
 #' @export
