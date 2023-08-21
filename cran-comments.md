@@ -1,3 +1,5 @@
+This is a resubmission, adding short documentation to global_roclet() function.
+
 ## Test environments
 
 - GitHub Actions (macOS latest): release (4.3.1)
